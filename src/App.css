@@ -1,0 +1,14 @@
+h1 {
+  text-align: center;
+}
+
+.ticket-stub {
+  margin: 1em;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding: 1em;
+}
+
+strong {
+  margin-left: 1em;
+}
