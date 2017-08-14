@@ -22,7 +22,7 @@ class Calculator extends Component {
       operator: null,
       decimal: false,
       output: 0
-    }
+    };
 
     this.updateDisplay = this.updateDisplay.bind(this);
   }
@@ -39,9 +39,9 @@ class Calculator extends Component {
   }
 
   updateDisplay() {
-    if(this.state.operand1 && !this.state.operand2)
+    if(this.state.operand1 && !this.state.operator)
       this.setState({ output: this.state.operand1 });
-    else if(this.state.operand1 && this.state.operand2)
+    else if(this.state.operand1 && this.state.operator)
       this.setState({ output: this.state.operand2 });
     else if(!this.state.operand1 && !this.state.operand2)
       this.setState({ output: 0 });
