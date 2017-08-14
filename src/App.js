@@ -27,6 +27,18 @@ class Calculator extends Component {
     this.updateDisplay = this.updateDisplay.bind(this);
   }
 
+  reset() {
+    this.setState(
+      {
+        operand1: 0,
+        operand2: 0,
+        operator: null,
+        decimal: false,
+        output: 0
+      }, this.updateDisplay
+    );
+  }
+
   handleKeyPress(key) {
     if(key.type === 'number')
       this.acceptInput(key.value);
@@ -34,6 +46,8 @@ class Calculator extends Component {
       this.setState({ operator: key.value }, this.updateDisplay);
     else if(key.type === 'decimal')
       this.setState({ decimal: true });
+    else if(key.type === 'clear')
+      this.reset();
     else
       this.resolve();
   }
@@ -96,6 +110,8 @@ class Keypad extends Component {
       keypadResponse.type = 'decimal';
     else if(key === '=')
       keypadResponse.type = 'resolve';
+    else if(key === 'C')
+      keypadResponse.type = 'clear';
     else
       keypadResponse.type = 'operator';
 
