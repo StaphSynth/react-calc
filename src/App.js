@@ -83,7 +83,7 @@ class Calculator extends Component {
         operand1: product,
         operand2: 0,
         operator: null,
-        decimal: false
+        decimal: (product % 1 !== 0)
       },
       this.updateDisplay
     );
