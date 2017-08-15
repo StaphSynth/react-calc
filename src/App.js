@@ -40,16 +40,22 @@ class Calculator extends Component {
   }
 
   handleKeyPress(key) {
-    if(key.type === 'number')
-      this.acceptInput(key.value);
-    else if(key.type === 'operator')
-      this.setState({ operator: key.value }, this.updateDisplay);
-    else if(key.type === 'decimal')
-      this.setState({ decimal: true });
-    else if(key.type === 'clear')
-      this.reset();
-    else
-      this.resolve();
+    switch (key.type) {
+      case 'number':
+        this.acceptInput(key.value);
+        break;
+      case 'operator':
+        this.setState({ operator: key.value }, this.updateDisplay);
+        break;
+      case 'decimal':
+        this.setState({ decimal: true });
+        break;
+      case 'clear':
+        this.reset();
+        break;
+      default:
+        this.resolve();
+    }
   }
 
   updateDisplay() {
@@ -104,16 +110,22 @@ class Keypad extends Component {
     var keypadResponse = {};
     keypadResponse.value = key;
 
-    if(!isNaN(key))
-      keypadResponse.type = 'number';
-    else if(key === '.')
-      keypadResponse.type = 'decimal';
-    else if(key === '=')
-      keypadResponse.type = 'resolve';
-    else if(key === 'C')
-      keypadResponse.type = 'clear';
-    else
-      keypadResponse.type = 'operator';
+    switch(key) {
+      case /[0-9]/.test(key) && key:
+        keypadResponse.type = 'number';
+        break;
+      case '.':
+        keypadResponse.type = 'decimal';
+        break;
+      case '=':
+        keypadResponse.type = 'resolve';
+        break;
+      case 'C':
+        keypadResponse.type = 'clear';
+        break;
+      default:
+        keypadResponse.type = 'operator';
+    }
 
     this.props.parentCallback(keypadResponse);
   }
